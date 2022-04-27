@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Service from '../../Services/Services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import SocialLogin from "./SocialLogin"
+import { Link } from 'react-router-dom'
 
 const SignIn = () => {
     const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const SignIn = () => {
     }
     const loginHandler = (event) => {
         event.preventDefault()
-        
+
         Service.signin({ "email": email, "password": password })
             .then((res) => {
                 if (res.data !== '') {
@@ -66,7 +68,20 @@ const SignIn = () => {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
+                <br />
+                <br />
+                <Link to="/forgot-password" className="text-danger">
+                    {" "}
+                    Forgot Password
+                </Link>
+
+                <br />
+                <br /><SocialLogin />
             </form>
+            <hr className="my-4" />
+            <p className="text-center">
+                Don't have an account?<a href="/signup"> SignUp</a>
+            </p>
         </div>
     )
 }

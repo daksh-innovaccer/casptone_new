@@ -13,6 +13,15 @@ class Service{
     signup(data){
         return axios.post(USER_BASE_URL + 'auth/signup', data, {headers: headers})
     }
+    sociallogin(credentials){
+        return axios.post(USER_BASE_URL + 'auth/social-login', credentials, {headers:headers})
+    }
+    signout(){
+        return axios.get(USER_BASE_URL + "auth/signout")
+    }
+    forgotpassword(email){
+        return axios.post(USER_BASE_URL + "auth/forgot-password", email, {headers:headers})
+    }
 }
 
 export default new Service()
