@@ -9,11 +9,9 @@ const Header = (props) => {
                     <li>
                         <Link to="/list"></Link>
                     </li>
-
-                    {props.loggedState ?
-                        <li>
+           <li>
                             <button className="btn btn-primary" onClick={props.onLogoutClick}>Logout</button>
-                        </li> : ""}
+                        </li> 
 
                 </ul>
             </div>
