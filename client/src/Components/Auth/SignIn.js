@@ -29,7 +29,7 @@ const SignIn = () => {
         Service.signin({ "email": email, "password": password })
             .then((res) => {
                 try {
-                    console.log(res.data)
+                    
                     if (res.data!=='' && res.data.status === true) {
                         localStorage.setItem("token", res.data.token)
                         localStorage.setItem("chat-app-current-user", JSON.stringify(res.data.user))
@@ -38,12 +38,12 @@ const SignIn = () => {
 
                     }
                     else{
-                        console.log("|13333333321")
+                        
                         console.log(res.data.msg)
                         dispatch({ type: "logged", value: false })
                     }
                 } catch {
-                    console.log("|121212121")
+                    
                     console.log(res.data.error)
                 }
 
