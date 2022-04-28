@@ -7,13 +7,13 @@ const Header = (props) => {
             <div className="container-fluid">
                 <ul>
                     <li>
-                        <Link to="/list"></Link>
+                        <Link to="/list">List</Link>
                     </li>
 
-                    {props.loggedState ?
-                        <li>
-                            <button className="btn btn-primary" onClick={props.onLogoutClick}>Logout</button>
-                        </li> : ""}
+
+                    <li>
+                        <button className="btn btn-primary" onClick={props.onLogoutClick}>Logout</button>
+                    </li>
 
                 </ul>
             </div>
