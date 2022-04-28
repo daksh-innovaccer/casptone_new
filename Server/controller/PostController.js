@@ -52,6 +52,7 @@ const interact = async (req, res) => {
     res.status(201).json({success: true, post})
 }
 
+
 /* posts display on feed operations*/
 
 const fetchPosts = async (req, res) => {

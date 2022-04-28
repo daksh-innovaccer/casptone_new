@@ -5,12 +5,13 @@ const initialState = {
     password: '',
     isLogged: '',
     users: [],
-    fullname: '',
+    name: '',
     usermail: '',
     userpassword:'',
     userphone: '',
     usergender :'Male',
-    id: ''
+    id: '',
+    // message: ''
 }
 const crudReducer = (state = initialState, action) => {
     if (action.type === 'email') {
@@ -37,10 +38,10 @@ const crudReducer = (state = initialState, action) => {
             users: action.value
         }
     }
-    if (action.type === 'fullname') {
+    if (action.type === 'name') {
         return {
             ...state,
-            fullname: action.value
+            name: action.value
         }
     }
     if (action.type === 'usermail') {
@@ -67,6 +68,12 @@ const crudReducer = (state = initialState, action) => {
             usergender: action.value
         }
     }
+    // if (action.type === 'message') {
+    //     return {
+    //         ...state,
+    //         message: action.value
+    //     }
+    // }
     return state;
 }
 
