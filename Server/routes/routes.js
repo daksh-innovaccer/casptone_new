@@ -4,12 +4,11 @@ const postController = require('../controller/PostController');
 
 
 router.use("/auth", require("./auth"))
+router.use('/post', require('./post'))
 
 router.get("/", (req, res)=>{
     res.send("<h1>Welcome to the portal</h1>")
 })
-
-router.post('/create-post', postController);
 
 
 module.exports = router
