@@ -31,6 +31,22 @@ router.get("/", (req, res) => {
     res.send("hello")
 })
 
+
+router.get('/allusers', async(req,res,next)=> {
+    try {
+      const users = await User.find({ _id: { $ne: req.params.id } }).select([
+        "email",
+        "username",
+        "photo",
+        "_id",
+      ]);
+      return res.json(users);
+    } catch (ex) {
+      next(ex);
+    }
+  }
+) 
+
 // password forgot and reset routes
 router.post("/forgot-password", (req, res) => {
     console.log(req.body);
