@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
@@ -18,16 +18,21 @@ const Feed = () => {
         });
     }
     
-    useEffect(()=>{
+    useEffect(async ()=>{
         getPosts();
+
+        const localdata = await localStorage.getItem('chat-app-current-user');
+        dispatch({type:id, value: localdata._id});
     }, []);
 
     const {posts, id} = useSelector((state)=>state);
     //console.log(posts);
    
     return (      
-    <div >
+    <div className="container m-4">
+         <div align='center'>
          <h2>People are sharing their thoughts ! Had You ?</h2>
+         </div>
         
         <ul>
            {posts.map((post)=>(
@@ -41,7 +46,7 @@ const Feed = () => {
                         <Card.Text>{post.createdAt?.toString().split("T")[1].split(":")[0] + ":" + post.createdAt?.toString().split("T")[1].split(":")[1]+ " "+ "on "+ post.createdAt?.toString().split("T")[0]}</Card.Text>
                         
 
-                        <Button variant= "light" onClick={async ()=>{
+                        <Button variant=  "light" onClick={async ()=>{
                              const localdata = await JSON.parse(
                                 localStorage.getItem('chat-app-current-user')
                               );
@@ -52,7 +57,7 @@ const Feed = () => {
                             await Services.interact(postData);
                             console.log("success");
                         }}>⭐</Button>
-                        <Button variant= "light" onClick={async ()=>{
+                        <Button variant= "secondary" onClick={async ()=>{
                              const localdata = await JSON.parse(
                                 localStorage.getItem('chat-app-current-user')
                               );
