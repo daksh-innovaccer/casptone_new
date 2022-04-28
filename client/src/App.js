@@ -9,7 +9,7 @@ import Services from "./Services/Services"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ForgotPassword from "./Components/Auth/ForgotPassword"
-import Chat from "./Components/Chat"
+import Chat from "./Components/Chat.jsx"
 function App() {
     const localdata = localStorage.getItem('token')
     const { isLogged } = useSelector((state) => state)
