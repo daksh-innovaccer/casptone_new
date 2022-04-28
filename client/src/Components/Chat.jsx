@@ -15,16 +15,18 @@ export default function Chat() {
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentUser, setCurrentUser] = useState(undefined);
-    useEffect( () => {
-        (async()=>{if (!localStorage.getItem('chat-app-current-user')) {
-            navigate('/');
-        } else {
-            setCurrentUser(
-                await JSON.parse(
-                    localStorage.getItem('chat-app-current-user')
-                )
-            );
-        }}) ()
+    useEffect(() => {
+        (async () => {
+            if (!localStorage.getItem('chat-app-current-user')) {
+                navigate('/');
+            } else {
+                setCurrentUser(
+                    await JSON.parse(
+                        localStorage.getItem('chat-app-current-user')
+                    )
+                );
+            }
+        })()
     }, []);
     useEffect(() => {
         if (currentUser) {
