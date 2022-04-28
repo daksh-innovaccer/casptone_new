@@ -28,8 +28,9 @@ class Service {
     sendMessage(data){
         return axios.post(USER_BASE_URL + "message/addmsg", data, {headers:headers})
     }
-    getMessage(data){
-        return axios.get(USER_BASE_URL + "message/getmsg", data, {headers:headers})
+    async getMessage(data){
+        return await axios.post(USER_BASE_URL + "message/getmsg", data, {headers:headers})
+
     }
 }
 
