@@ -38,7 +38,7 @@ const deletePost = async (req, res) => {
 
 const interact = async (req, res) => {
     const {postID} = req.params;
-    const authUserID = await req.body.authUserID;
+    const authUserID =  req.body.authUserID;
 
     const post = await Post.findById(postID);
 
@@ -65,5 +65,21 @@ const fetchPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
-module.exports = {createPost, interact, deletePost, fetchPosts};
+const comment = async (req, res) => {
+    const {postID} = req.params;
+    const authUserID = await req.body.authUserID;
+    const text = await req.body.text;
+
+    const post = await Post.findById(postID);   
+
+    if (!post){
+        //throw "Post not found";
+        res.status(400).send("Bad Request");
+    }
+
+    await post.comment(authUserID, text);
+    res.status(201).json({commentAdded: true, post, comment})
+}
+
+module.exports = {createPost, interact, deletePost, fetchPosts, comment};
 
