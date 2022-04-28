@@ -42,7 +42,7 @@ const SocialLogin = () => {
         <div>
             <GoogleLogin
                 clientId="758701250356-ut77tpqko0umblc2vuih6qoiq120plbt.apps.googleusercontent.com"
-                buttonText="Login with Google"
+                buttonText='Login with Google'
                 onSuccess={onSuccess}
                 onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}

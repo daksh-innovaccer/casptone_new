@@ -11,6 +11,10 @@ app.use(express.urlencoded({ extended: true }))
 
 const uri = "mongodb+srv://daksh:daksh%402001@cluster0.hphbc.mongodb.net/user-interaction?retryWrites=true&w=majority"
 
+app.get('/cors', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send({ "msg": "This has CORS enabled 🎈" })
+})
 
 app.use('/', require('./routes/routes'))
 
