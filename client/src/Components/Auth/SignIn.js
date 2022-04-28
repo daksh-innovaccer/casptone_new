@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import SocialLogin from "./SocialLogin"
 import { Link } from 'react-router-dom'
+import './SignIn.css'
 
 const SignIn = () => {
     const dispatch = useDispatch()
@@ -27,61 +28,83 @@ const SignIn = () => {
 
         Service.signin({ "email": email, "password": password })
             .then((res) => {
-                if (res.status!=401) {
-                    localStorage.setItem("token", res.data.token)
-                    dispatch({ type: "logged", value: true })
-                    navigate("/list")
+                try {
+                    //console.log(res.data)
+                    if (res.data !== '' && res.data !== 'error') {
+                        localStorage.setItem("token", res.data.token)
+                        dispatch({ type: "logged", value: true })
+                        navigate("/list")
 
+                    }
+                    else if (res.data === 'error') {
+                        dispatch({ type: "logged", value: false })
+                    }
+                } catch {
+                    console.log(res.data.error)
                 }
-                else {
-                    dispatch({ type: "logged", value: false })
-                }
+
             })
     }
 
     return (
-        <div className="container mt-3">
-            {isLogged === false ?
-                (<div className="alert alert-danger">
-                    <strong>Error: </strong>Login Credentials Failed
-                </div>)
-                : ("")}
-            <form onSubmit={loginHandler}>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="email">Email</label>
-                    <input type="email"
-                        name="email"
-                        id="email"
-                        className="form-control"
-                        placeholder="Enter Email"
-                        onChange={emailChangeHandler}
-                    />
-                </div>
-                <div className="mb-3 mt-3">
-                    <label htmlFor="password">Password</label>
-                    <input type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Enter Password"
-                        className="form-control"
-                        onChange={passwordChangeHandler}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Login</button>
-                <br />
-                <br />
-                <Link to="/forgot-password" className="text-danger">
-                    {/* {" "} */}
-                    Forgot Password
-                </Link>
+        <div className="text-center">
+            <h1 className='h1margin mt-3 mb-3 fw-normal'>Log In</h1>
+            <main className="form-signin">
+                {isLogged === false ?
+                    (<div className="alert alert-danger">
+                        <strong>Error: </strong>Login Credentials Failed
+                    </div>)
+                    : ("")}
+                <form onSubmit={loginHandler}>
+                    <div className="mb-3 mt-3 form-floating">
 
-                <br />
-                <br /><SocialLogin />
-            </form>
-            <hr className="my-4" />
-            <p className="text-center">
-                Don't have an account?<a href="/signup"> SignUp</a>
-            </p>
+                        <input type="email"
+                            name="email"
+                            id="email"
+                            className="form-control"
+                            placeholder="Enter Email"
+                            autoComplete="username"
+                            onChange={emailChangeHandler}
+                        />
+                        <label htmlFor="email">Email</label>
+                    </div>
+                    <div className="mb-3 mt-3 form-floating">
+
+                        <input type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Enter Password"
+                            className="form-control"
+                            autoComplete='current-password'
+                            onChange={passwordChangeHandler}
+                        />
+                        <label htmlFor="password">Password</label>
+                    </div>
+                    <button type="submit" className="w-100 btn btn-lg btn-primary mb-3">Login</button>
+                    <br />
+                    <div>
+                        <Link to="/forgot-password" className="text-danger">
+                            {/* {" "} */}
+                            Forgot Password
+                        </Link>
+                    </div>
+                    <br />
+                    <div class="_0tv-g">or</div>
+
+                    <div class="qF0y9 Igw0E IwRSH eGOV_ acqo5 _4EzTm bkEs3 CovQj jKUp7  DhRcB">
+                        <button type="submit" className="w-100 btn btn-lg"><SocialLogin /></button>
+                    </div>
+
+
+
+                    {/* <br />
+                    <br /><SocialLogin /> */}
+                </form>
+                <hr className="my-4" />
+                <p className="text-center">
+                    Don't have an account?<a href="/signup"> SignUp</a>
+                </p>
+            </main>
         </div>
     )
 }
