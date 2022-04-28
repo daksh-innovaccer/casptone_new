@@ -172,16 +172,14 @@ router.post("/signin", (req, res) => {
     User.findOne({ email }, (err, user) => {
         // if err or no user
         if (err || !user) {
-            return res.status(401).json({
-                error: "User with that email does not exist. Please signup."
-            });
+            console.log("User with this email does not exist")
+            return res.send("error")
         }
         // if user is found make sure the email and password match
         // create authenticate method in model and use here
-        if (!user.authenticate(password)) {
-            return res.status(401).json({
-                error: "Email and password do not match"
-            });
+        else if (!user.authenticate(password)) {
+            console.log("password not matched")
+            return res.send("error")
         }
         // generate a token with user id and secret
         // const token = jwt.sign({ _id: user._id  }, process.env.JWT_SECRET);
