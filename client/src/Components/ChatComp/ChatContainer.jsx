@@ -4,6 +4,8 @@ import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute  } from "../../utils/APIRoutes";
+import Services from "../../Services/Services";
+
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -11,12 +13,16 @@ export default function ChatContainer({ currentChat, socket }) {
 
   useEffect(async () => {
     const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      localStorage.getItem('chat-app-current-user')
     );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
+    var response
+    const req={
+        from: data._id,
+        to: currentChat._id,
+    }
+    Services.getMessage(req).then((res)=>{
+        response= res
+    })
     setMessages(response.data);
   }, [currentChat]);
 
@@ -24,7 +30,7 @@ export default function ChatContainer({ currentChat, socket }) {
     const getCurrentChat = async () => {
       if (currentChat) {
         await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          localStorage.getItem('chat-app-current-user')
         )._id;
       }
     };
@@ -33,19 +39,26 @@ export default function ChatContainer({ currentChat, socket }) {
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      localStorage.getItem('chat-app-current-user')
     );
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
       msg,
     });
-    await axios.post(sendMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-      message: msg,
-    });
-
+    // await axios.post(sendMessageRoute, {
+    //   from: data._id,
+    //   to: currentChat._id,
+    //   message: msg,
+    // });
+    const req = {
+        from: data._id,
+        to: currentChat._id,
+        message: msg,
+    }
+    Services.sendMessage(req).then((res)=>{
+        console.log(res)
+    })
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
@@ -73,7 +86,7 @@ export default function ChatContainer({ currentChat, socket }) {
         <div className="user-details">
           
           <div className="username">
-            <h3>{currentChat.username}</h3>
+            <h3>{currentChat.name}</h3>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ import Services from "./Services/Services"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ForgotPassword from "./Components/Auth/ForgotPassword"
-import Chat from "./Components/Chat"
+import Chat from "./Components/Chat.jsx"
 function App() {
     const localdata = localStorage.getItem('token')
     const { isLogged } = useSelector((state) => state)
@@ -17,6 +17,7 @@ function App() {
     const navigate = useNavigate()
     const logoutHandler = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem("chat-app-current-user")
         Services.signout().then((res) => {
             //dispatch({ type: "logged", value: false })
             navigate("/signin")
@@ -34,7 +35,7 @@ function App() {
                 <Route path='/signin' element={<SignIn />}></Route>
                 <Route path="/list" element={<ListDetails />}></Route>
                 <Route path="/signup" element={<Signup />}></Route>
-                <Route path="/signout"></Route>
+                {/* <Route path="/signout"></Route> */}
                 <Route path="/forgot-password" element={<ForgotPassword />}></Route>
                 <Route path="/chat" element={<Chat />} />
 
