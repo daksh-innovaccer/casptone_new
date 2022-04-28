@@ -4,6 +4,8 @@ import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute  } from "../../utils/APIRoutes";
+import Services from "../../Services/Services";
+
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -13,10 +15,14 @@ export default function ChatContainer({ currentChat, socket }) {
     const data = await JSON.parse(
       localStorage.getItem('chat-app-current-user')
     );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
+    var response
+    const req={
+        from: data._id,
+        to: currentChat._id,
+    }
+    Services.getMessage(req).then((res)=>{
+        response= res
+    })
     setMessages(response.data);
   }, [currentChat]);
 
@@ -40,12 +46,19 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       msg,
     });
-    await axios.post(sendMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-      message: msg,
-    });
-
+    // await axios.post(sendMessageRoute, {
+    //   from: data._id,
+    //   to: currentChat._id,
+    //   message: msg,
+    // });
+    const req = {
+        from: data._id,
+        to: currentChat._id,
+        message: msg,
+    }
+    Services.sendMessage(req).then((res)=>{
+        console.log(res)
+    })
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);

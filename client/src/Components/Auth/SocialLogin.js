@@ -23,6 +23,7 @@ const SocialLogin = () => {
         Services.sociallogin(user).then((res) => {
             if (res.data !== '') {
                 localStorage.setItem("token", res.data.token)
+                localStorage.setItem("chat-app-current-user", JSON.stringify(res.data.user))
                 dispatch({ type: "logged", value: true })
                 navigate("/list")
 
