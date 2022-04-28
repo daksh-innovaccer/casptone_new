@@ -29,10 +29,10 @@ const Signup = () => {
             password: password
         }
         Services.signup(data).then((res) => {
-            if (res.data != '') {
+            if (res.data !== '') {
                 navigate('/signin')
             }
-            
+
         })
 
     }
@@ -71,7 +71,11 @@ const Signup = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
             </form>
-
+            <hr className="my-4" />
+            <p className="text-center">
+                Already have an account? {'  '}
+                <a href="/signin">Sign In</a>
+            </p>
         </div>
     )
 }

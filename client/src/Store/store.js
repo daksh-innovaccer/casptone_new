@@ -3,7 +3,7 @@ import { createStore } from 'redux'
 const initialState = {
     email: '',
     password: '',
-    isLogged: true,
+    isLogged: '',
     users: [],
     name: '',
     usermail: '',

@@ -27,7 +27,7 @@ const SignIn = () => {
 
         Service.signin({ "email": email, "password": password })
             .then((res) => {
-                if (res.data !== '') {
+                if (res.status!=401) {
                     localStorage.setItem("token", res.data.token)
                     dispatch({ type: "logged", value: true })
                     navigate("/list")
@@ -71,7 +71,7 @@ const SignIn = () => {
                 <br />
                 <br />
                 <Link to="/forgot-password" className="text-danger">
-                    {" "}
+                    {/* {" "} */}
                     Forgot Password
                 </Link>
 

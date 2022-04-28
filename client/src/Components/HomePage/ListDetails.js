@@ -1,4 +1,4 @@
-const ListDetails = () =>{
+const ListDetails = (props) =>{
     return(
         <h1>Helllo</h1>
     )

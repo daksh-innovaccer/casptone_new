@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import SignIn from './Components/Auth/SignIn'
 import Signup from './Components/Auth/Signup'
-import ListDetails from "./Components/Auth/ListDetails";
+import ListDetails from './Components/HomePage/ListDetails'
 import Header from "./Components/Header/Header";
 import Services from "./Services/Services"
 import { useDispatch } from "react-redux"
@@ -12,7 +12,7 @@ import ForgotPassword from "./Components/Auth/ForgotPassword"
 
 function App() {
     const localdata = localStorage.getItem('token')
-    const { email, password, isLogged } = useSelector((state) => state)
+    const { isLogged } = useSelector((state) => state)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutHandler = () => {
@@ -21,21 +21,24 @@ function App() {
             //dispatch({ type: "logged", value: false })
             navigate("/signin")
         })
-           
+
     }
 
-return (
-    <div className="container mt-3 mb-3">
-        {localdata ? <Header loggedState={isLogged} onLogoutClick={logoutHandler} /> : ""}
-        <Routes>
-            <Route path='/signin' element={<SignIn />}></Route>
-            <Route path="/list" element={<ListDetails />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/signout"></Route>
-            <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        </Routes>
-    </div>
-);
+    return (
+        <div className="container mt-3 mb-3">
+            {localdata ? <Header loggedState={isLogged} onLogoutClick={logoutHandler} /> : ""}
+            {/* <h1>Hi There!</h1>
+        <a href="/signin">SignIn</a> */}
+            <Routes>
+                <Route path='/' element={<SignIn />}></Route>
+                <Route path='/signin' element={<SignIn />}></Route>
+                <Route path="/list" element={<ListDetails />}></Route>
+                <Route path="/signup" element={<Signup />}></Route>
+                <Route path="/signout"></Route>
+                <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
