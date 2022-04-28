@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+
 export default function Contacts({ contacts, currentUser ,changeChat}) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
-  useEffect(async () => {
-    const data = await JSON.parse(
+  useEffect(()=> {
+    (async()=>{const data = await JSON.parse(
       localStorage.getItem('chat-app-current-user')
     );
     setCurrentUserName(data.name);
+              })()
   }, []);
   useEffect( () => {
     if(currentUser){
@@ -46,14 +48,14 @@ export default function Contacts({ contacts, currentUser ,changeChat}) {
           </div>
           <div className="current-user">
 
-            <div className="username">
-              <h2>{currentUserName}</h2>
-            </div>
-          </div>
-        </Container>
-      )}
-    </>
-  );
+                        <div className="username">
+                            <h2>{currentUserName}</h2>
+                        </div>
+                    </div>
+                </Container>
+            )}
+        </>
+    );
 }
 const Container = styled.div`
   display: grid;
