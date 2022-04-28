@@ -1,6 +1,6 @@
 const ListDetails = (props) =>{
     return(
-        <h1>Helllo</h1>
+        <h1>### LIST POSTS HERE ###</h1>
     )
 }
 

@@ -28,12 +28,11 @@ export default function Contacts({ contacts, changeChat }) {
               return (
                 <div
                   key={contact._id}
-                  className={`contact ${
-                    index === currentSelected ? "selected" : ""
-                  }`}
+                  className={`contact ${index === currentSelected ? "selected" : ""
+                    }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                 
+
                   <div className="username">
                     <h3>{contact.username}</h3>
                   </div>
@@ -42,7 +41,7 @@ export default function Contacts({ contacts, changeChat }) {
             })}
           </div>
           <div className="current-user">
-            
+
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>

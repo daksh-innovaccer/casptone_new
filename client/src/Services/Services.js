@@ -22,6 +22,15 @@ class Service {
     forgotpassword(email) {
         return axios.post(USER_BASE_URL + "auth/forgot-password", email, { headers: headers })
     }
+    allusers(id){
+        return axios.get(USER_BASE_URL + "auth/alluser/" + id)
+    }
+    sendMessage(data){
+        return axios.post(USER_BASE_URL + "message/addmsg", data, {headers:headers})
+    }
+    getMessage(data){
+        return axios.get(USER_BASE_URL + "message/getmsg", data, {headers:headers})
+    }
 }
 
 export default new Service()
