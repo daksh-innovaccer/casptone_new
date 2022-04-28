@@ -24,9 +24,14 @@ const PostSchema = new Schema({
     ],
     comments: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'CommentSchema'
-        }
+        
+            text: String,
+            writer: {
+                type: Schema.Types.ObjectId,
+                ref: "User",
+            }
+        },
+        
     ],
 },
 {timestamps: true},
@@ -46,9 +51,15 @@ PostSchema.methods.interact = async function (userID) {
         return this.save();
     }
     return Promise.resolve(this);
-};
+};  
 
-
+PostSchema.methods.comment = async function (userID, text){
+    if (userID && text){
+    await this.comments.push({writer: userID, text: text});
+    return this.save();
+    }
+    return Promise.resolve(this);
+}
 
 const Post = mongoose.model("Post", PostSchema);
 
