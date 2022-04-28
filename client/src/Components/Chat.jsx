@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Services from "../Services/Services";
 import ChatContainer from "./ChatComp/ChatContainer";
 import Contacts from "./ChatComp/Contacts";
+import Welcome from "./ChatComp/Welcome";
 const host = "http://localhost:3500"
 
 export default function Chat() {
@@ -15,16 +16,18 @@ export default function Chat() {
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentUser, setCurrentUser] = useState(undefined);
-    useEffect( () => {
-        (async()=>{if (!localStorage.getItem('chat-app-current-user')) {
-            navigate('/');
-        } else {
-            setCurrentUser(
-                await JSON.parse(
-                    localStorage.getItem('chat-app-current-user')
-                )
-            );
-        }}) ()
+    useEffect(() => {
+        (async () => {
+            if (!localStorage.getItem('chat-app-current-user')) {
+                navigate('/');
+            } else {
+                setCurrentUser(
+                    await JSON.parse(
+                        localStorage.getItem('chat-app-current-user')
+                    )
+                );
+            }
+        })()
     }, []);
     useEffect(() => {
         if (currentUser) {
@@ -51,9 +54,9 @@ export default function Chat() {
         <>
             <Container>
                 <div className="container">
-                    <Contacts contacts={contacts} changeChat={handleChatChange} />
+                    <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
                     {currentChat === undefined ? (
-                        ""
+                       <Welcome/>
                     ) : (
                         <ChatContainer currentChat={currentChat} socket={socket} />
                     )}
