@@ -3,6 +3,10 @@ const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 const helmet = require('helmet')
+const messageRoutes = require("./routes/messages");
+const socket = require("socket.io");
+
+
 
 app.use(helmet())
 app.use(cors())
@@ -19,11 +23,12 @@ app.get('/cors', (req, res) => {
 app.use('/', require('./routes/routes'))
 
 
+
 // app.get('/', (req,res)=>{
 //     res.send("<h1>Hello there</h1>")
 // })
 
-app.listen(3500, (e) => {
+const server=app.listen(3500, (e) => {
     console.log("Server listening at 3500")
     const connectionParams = {
         useNewUrlParser: true,
@@ -39,3 +44,25 @@ app.listen(3500, (e) => {
             console.error(`Error connecting to the database. ${err}`);
         })
 })
+
+const io = socket(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      credentials: true,
+    },
+  });
+
+  global.onlineUsers = new Map();
+  io.on("connection", (socket) => {
+    global.chatSocket = socket;
+    // socket.on("add-user", (userId) => {
+    //   onlineUsers.set(userId, socket.id);
+    // });
+  
+    socket.on("send-msg", (data) => {
+      const sendUserSocket = onlineUsers.get(data.to);
+      if (sendUserSocket) {
+        socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+      }
+    });
+  });  
