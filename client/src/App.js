@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ForgotPassword from "./Components/Auth/ForgotPassword"
 import Chat from "./Components/Chat.jsx"
+import AddPost from "./Components/Post/AddPost"
 function App() {
     const localdata = localStorage.getItem('token')
     const { isLogged } = useSelector((state) => state)
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/signup" element={<Signup />}></Route>
                 {/* <Route path="/signout"></Route> */}
                 <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                <Route path="/add-post" element={<AddPost/>}></Route>
                 <Route path="/chat" element={<Chat />} />
 
             </Routes>

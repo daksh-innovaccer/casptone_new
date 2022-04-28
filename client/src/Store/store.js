@@ -14,6 +14,8 @@ const initialState = {
     // message: ''
 
     text: "",
+    posts: [],
+    liked: false,
 }
 const crudReducer = (state = initialState, action) => {
     if (action.type === 'email') {
@@ -80,6 +82,18 @@ const crudReducer = (state = initialState, action) => {
         return {
             ...state,
             text: action.value
+        }
+    }
+    if (action.type === 'posts') {
+        return {
+            ...state,
+            posts: action.value
+        }
+    }
+    if (action.type === 'liked') {
+        return {
+            ...state,
+            liked: action.value
         }
     }
     return state;

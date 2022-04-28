@@ -1,17 +1,26 @@
 import { Link, useNavigate } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
+import Services from "../../Services/Services";
 
 const AddPost = () => {
     const {id, text} = useSelector(state=>state);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const postHandler = (e) =>{
+    const postHandler = async (e) => {
         e.preventDefault();
+        const localdata = await JSON.parse(
+            localStorage.getItem('chat-app-current-user')
+          );
+          console.log(localdata._id);
         const postData = {
-            "author":id,
+            "author": localdata._id,
             "text": text,
         }
+        Services.addPost(postData).then((res)=>{
+            console.log(postData);
+            navigate('/list')
+        });
     }
     return (
         <div className="container m-2">

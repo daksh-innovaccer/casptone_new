@@ -31,6 +31,23 @@ class Service {
     getMessage(data){
         return axios.get(USER_BASE_URL + "message/getmsg", data, {headers:headers})
     }
+
+    // post services
+    addPost(postData){
+        console.log(postData);
+
+        return axios.post(USER_BASE_URL + "post/create", postData, {headers:headers});
+    }
+
+    getPosts(){
+        return axios.get(USER_BASE_URL + "post/fetch");
+    }
+    interact(postData){
+        return axios.post(USER_BASE_URL + "post/interact", postData, {headers:headers});
+    }
+    delete(postData){
+        return axios.delete(USER_BASE_URL + "post/delete",{headers:headers}, postData);
+    }
 }
 
 export default new Service()
