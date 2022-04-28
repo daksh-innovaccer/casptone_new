@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 export default function Welcome() {
   const [userName, setCurrentUserName] = useState("");
-  useEffect(async () => {
-    const data = await JSON.parse(
+  useEffect( () => {
+
+    (async()=>{const data = await JSON.parse(
       localStorage.getItem('chat-app-current-user')
     );
-    setCurrentUserName(data.name);
+    setCurrentUserName(data.name);})()
   }, []);
   return (
     <Container>
