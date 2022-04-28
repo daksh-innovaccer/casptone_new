@@ -12,6 +12,8 @@ const initialState = {
     usergender :'Male',
     id: '',
     // message: ''
+
+    text: "",
 }
 const crudReducer = (state = initialState, action) => {
     if (action.type === 'email') {
@@ -74,6 +76,12 @@ const crudReducer = (state = initialState, action) => {
     //         message: action.value
     //     }
     // }
+    if (action.type === 'text') {
+        return {
+            ...state,
+            text: action.value
+        }
+    }
     return state;
 }
 

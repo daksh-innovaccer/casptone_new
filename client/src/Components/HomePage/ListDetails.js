@@ -1,6 +1,12 @@
+import AddPost from "../Post/AddPost"
+
 const ListDetails = (props) =>{
     return(
-        <h1>Helllo</h1>
+     <div>   
+    <h1>Hel525llo</h1>
+    <AddPost/>   
+    </div>
+    
     )
 }
 
