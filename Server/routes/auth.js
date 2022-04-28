@@ -34,7 +34,7 @@ router.get("/", (req, res) => {
 
 router.get('/alluser/:id', async (req, res) => {
 
-    const users = await User.find({ _id: `${req.params.id}` }).select([
+    const users = await User.find({ _id: {$ne: req.params.id} }).select([
         "email",
         "name",
         "photo",
