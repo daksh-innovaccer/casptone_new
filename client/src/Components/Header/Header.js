@@ -27,7 +27,7 @@ const Header = (props) => {
                             <a class="nav-link active" aria-current="page" href="/add-post">Add Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/chat">Chat</a>
+                            
                             <a class="nav-link active" onClick={chatHandler}>Chat</a>
                         </li>
 
@@ -38,9 +38,6 @@ const Header = (props) => {
                 </div>
             </div>
         </nav>
-
-
-
 
     )
 }

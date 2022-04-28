@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom"
 import ForgotPassword from "./Components/Auth/ForgotPassword"
 import Chat from "./Components/Chat.jsx"
 import AddPost from "./Components/Post/AddPost"
+import React, {useEffect} from 'react'
+
 function App() {
     const localdata = localStorage.getItem('token')
     const { isLogged } = useSelector((state) => state)
@@ -25,6 +27,9 @@ function App() {
         })
 
     }
+    useEffect(() => {
+        document.title = "User interaction"
+      }, [])
 
     return (
         <div className="container mt-3 mb-3">
