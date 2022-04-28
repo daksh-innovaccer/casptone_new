@@ -9,11 +9,10 @@ const Header = (props) => {
                     <li>
                         <Link to="/list">List</Link>
                     </li>
+           <li>
+                            <button className="btn btn-primary" onClick={props.onLogoutClick}>Logout</button>
+                        </li> 
 
-
-                    <li>
-                        <button className="btn btn-primary" onClick={props.onLogoutClick}>Logout</button>
-                    </li>
 
                 </ul>
             </div>
