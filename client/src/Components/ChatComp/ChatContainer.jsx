@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import { sendMessageRoute, recieveMessageRoute  } from "../../utils/APIRoutes";
+import { sendMessageRoute, recieveMessageRoute } from "../../utils/APIRoutes";
 import Services from "../../Services/Services";
 
 export default function ChatContainer({ currentChat, socket }) {
@@ -11,19 +11,27 @@ export default function ChatContainer({ currentChat, socket }) {
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
-  useEffect(async () => {
-    const data = await JSON.parse(
-      localStorage.getItem('chat-app-current-user')
-    );
-    var response
-    const req={
+  useEffect(() => {
+    (async () => {
+      const data = await JSON.parse(
+        localStorage.getItem('chat-app-current-user')
+      );
+      // var response
+      const response = await axios.post(recieveMessageRoute, {
         from: data._id,
         to: currentChat._id,
-    }
-    Services.getMessage(req).then((res)=>{
-        response= res
-    })
-    setMessages(response.data);
+      });
+      console.log(typeof(response))
+
+      // Services.getMessage({
+      //   from: data._id,
+      //   to: currentChat._id,
+      // }).then((res) => {
+      //   response = res
+        // console.log(typeof(response))
+      // })
+      setMessages(response.data);
+    })()
   }, [currentChat]);
 
   useEffect(() => {
@@ -46,18 +54,14 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       msg,
     });
-    // await axios.post(sendMessageRoute, {
-    //   from: data._id,
-    //   to: currentChat._id,
-    //   message: msg,
-    // });
+
     const req = {
-        from: data._id,
-        to: currentChat._id,
-        message: msg,
+      from: data._id,
+      to: currentChat._id,
+      message: msg,
     }
-    Services.sendMessage(req).then((res)=>{
-        console.log(res)
+    Services.sendMessage(req).then((res) => {
+      console.log(res)
     })
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
@@ -84,7 +88,7 @@ export default function ChatContainer({ currentChat, socket }) {
     <Container>
       <div className="chat-header">
         <div className="user-details">
-          
+
           <div className="username">
             <h3>{currentChat.name}</h3>
           </div>
@@ -95,9 +99,8 @@ export default function ChatContainer({ currentChat, socket }) {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
+                className={`message ${message.fromSelf ? "sended" : "recieved"
+                  }`}
               >
                 <div className="content ">
                   <p>{message.message}</p>
