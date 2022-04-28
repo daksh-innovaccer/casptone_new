@@ -3,28 +3,42 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import { sendMessageRoute, recieveMessageRoute  } from "../../utils/APIRoutes";
+import { sendMessageRoute, recieveMessageRoute } from "../../utils/APIRoutes";
+import Services from "../../Services/Services";
+
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
-  useEffect(async () => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
+  useEffect(() => {
+    (async () => {
+      const data = await JSON.parse(
+        localStorage.getItem('chat-app-current-user')
+      );
+      // var response
+      const response = await axios.post(recieveMessageRoute, {
+        from: data._id,
+        to: currentChat._id,
+      });
+      console.log(typeof(response))
+
+      // Services.getMessage({
+      //   from: data._id,
+      //   to: currentChat._id,
+      // }).then((res) => {
+      //   response = res
+        // console.log(typeof(response))
+      // })
+      setMessages(response.data);
+    })()
   }, [currentChat]);
 
   useEffect(() => {
     const getCurrentChat = async () => {
       if (currentChat) {
         await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          localStorage.getItem('chat-app-current-user')
         )._id;
       }
     };
@@ -33,19 +47,22 @@ export default function ChatContainer({ currentChat, socket }) {
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      localStorage.getItem('chat-app-current-user')
     );
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
       msg,
     });
-    await axios.post(sendMessageRoute, {
+
+    const req = {
       from: data._id,
       to: currentChat._id,
       message: msg,
-    });
-
+    }
+    Services.sendMessage(req).then((res) => {
+      console.log(res)
+    })
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
@@ -71,9 +88,9 @@ export default function ChatContainer({ currentChat, socket }) {
     <Container>
       <div className="chat-header">
         <div className="user-details">
-          
+
           <div className="username">
-            <h3>{currentChat.username}</h3>
+            <h3>{currentChat.name}</h3>
           </div>
         </div>
       </div>
@@ -82,9 +99,8 @@ export default function ChatContainer({ currentChat, socket }) {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
+                className={`message ${message.fromSelf ? "sended" : "recieved"
+                  }`}
               >
                 <div className="content ">
                   <p>{message.message}</p>

@@ -12,7 +12,7 @@ const { sendEmail } = require("../helper/index");
 // dotenv.config();
 
 const mailjet = require('node-mailjet');
-const clientUrl=  'http://localhost:3000'
+const clientUrl = 'http://localhost:3000'
 const serverUrl = 'http://localhost:3500'
 
 // const {
@@ -32,20 +32,18 @@ router.get("/", (req, res) => {
 })
 
 
-router.get('/allusers', async(req,res,next)=> {
-    try {
-      const users = await User.find({ _id: { $ne: req.params.id } }).select([
+router.get('/alluser/:id', async (req, res) => {
+
+    const users = await User.find({ _id: {$ne: req.params.id} }).select([
         "email",
-        "username",
+        "name",
         "photo",
         "_id",
-      ]);
-      return res.json(users);
-    } catch (ex) {
-      next(ex);
-    }
-  }
-) 
+    ]);
+    return res.json(users);
+
+}
+)
 
 // password forgot and reset routes
 router.post("/forgot-password", (req, res) => {
@@ -164,7 +162,7 @@ router.post("/social-login", (req, res) => {
             res.cookie("t", token, { expire: new Date() + 9999 });
             // return response with user and token to frontend client
             const { _id, name, email } = user;
-            return res.json({ token, user: { _id, name, email } });
+            return res.json({ token, user });
         }
     });
 });
@@ -183,33 +181,26 @@ router.post("/signup", async (req, res) => {
     res.status(200).json({ message: "Signup success! Please login." });
 });
 
-router.post("/signin", (req, res) => {
+router.post("/signin", async (req, res) => {
     const { email, password } = req.body;
-    User.findOne({ email }, (err, user) => {
-        // if err or no user
-        if (err || !user) {
-            console.log("User with this email does not exist")
-            return res.send("error")
-        }
-        // if user is found make sure the email and password match
-        // create authenticate method in model and use here
-        else if (!user.authenticate(password)) {
-            console.log("password not matched")
-            return res.send("error")
-        }
-        // generate a token with user id and secret
-        // const token = jwt.sign({ _id: user._id  }, process.env.JWT_SECRET);
-        const token = jwt.sign({ _id: user._id, role: user.role }, "secret");
-        // persist the token as 't' in cookie with expiry date
-        res.cookie("t", token, { expire: new Date() + 9999 });
-        // return response with user and token to frontend client
-        // const { _id, name, email } = user;
-        // return res.json({ token, user: { _id, email, name } });
-        const { _id, name, email, role } = user;
-        return res.json({ token, user: { _id, email, name, role } });
-    });
+    const user = await User.findOne({ email });
+    // console.log(user._id)
+    if (!user) {
+        console.log("not found user")
+        return res.json({ msg: "Incorrect Username or Password", status: false });
+    }
+    const isPasswordValid = await user.authenticate(password)
+    if (!isPasswordValid) {
+        console.log("password invalid")
+        return res.json({ msg: "Incorrect Username or Password", status: false });
+    }
+    // delete user.password;
+    const token = jwt.sign({ _id: user._id, role: user.role }, "secret");
+    return res.json({ status: true, token, user });
 });
-router.get("/signout", (req, res)=>{
+
+
+router.get("/signout", (req, res) => {
     res.clearCookie("t");
     return res.json({ message: "Signout success!" });
 });

@@ -11,10 +11,13 @@ const SignIn = () => {
     const navigate = useNavigate()
     const { email, password, isLogged } = useSelector((state) => state)
     useEffect(() => {
+        
         const localData = localStorage.getItem("token")
         if (localData) {
             navigate("/list")
         }
+        // navigate('/signin')
+
     }, [])
 
     const emailChangeHandler = (event) => {
@@ -29,17 +32,23 @@ const SignIn = () => {
         Service.signin({ "email": email, "password": password })
             .then((res) => {
                 try {
-                    //console.log(res.data)
-                    if (res.data !== '' && res.data !== 'error') {
+                    
+                    if (res.data!=='' && res.data.status === true) {
                         localStorage.setItem("token", res.data.token)
+                        localStorage.setItem("chat-app-current-user", JSON.stringify(res.data.user))
+                        const localdata= localStorage.getItem("chat-app-current-user")
+                        console.log(localdata.name)
                         dispatch({ type: "logged", value: true })
                         navigate("/list")
 
                     }
-                    else if (res.data === 'error') {
+                    else{
+                        
+                        console.log(res.data.msg)
                         dispatch({ type: "logged", value: false })
                     }
                 } catch {
+                    
                     console.log(res.data.error)
                 }
 

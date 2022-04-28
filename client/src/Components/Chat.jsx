@@ -3,58 +3,67 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import styled from "styled-components";
-import { allUsersRoute, host } from "../utils/APIRoutes";
+// import { allUsersRoute, host } from "../utils/APIRoutes";
+import Services from "../Services/Services";
 import ChatContainer from "./ChatComp/ChatContainer";
 import Contacts from "./ChatComp/Contacts";
+import Welcome from "./ChatComp/Welcome";
+const host = "http://localhost:3500"
 
 export default function Chat() {
-  const navigate = useNavigate();
-  const socket = useRef();
-  const [contacts, setContacts] = useState([]);
-  const [currentChat, setCurrentChat] = useState(undefined);
-  const [currentUser, setCurrentUser] = useState(undefined);
-  useEffect(async () => {
-    if (!localStorage.getItem('token')) {
-      navigate("/signin");
-    } else {
-      setCurrentUser(
-        await JSON.parse(
-          localStorage.getItem('token')
-        )
-      );
-    }
-  }, []);
-  useEffect(() => {
-    if (currentUser) {
-      socket.current = io(host);
-      socket.current.emit("add-user", currentUser._id);
-    }
-  }, [currentUser]);
+    const navigate = useNavigate();
+    const socket = useRef();
+    const [contacts, setContacts] = useState([]);
+    const [currentChat, setCurrentChat] = useState(undefined);
+    const [currentUser, setCurrentUser] = useState(undefined);
+    useEffect(() => {
+        (async () => {
+            if (!localStorage.getItem('chat-app-current-user')) {
+                navigate('/');
+            } else {
+                setCurrentUser(
+                    await JSON.parse(
+                        localStorage.getItem('chat-app-current-user')
+                    )
+                );
+            }
+        })()
+    }, []);
+    useEffect(() => {
+        if (currentUser) {
+            socket.current = io(host);
+            socket.current.emit("add-user", currentUser._id);
+        }
+    }, [currentUser]);
 
-  useEffect(async () => {
-    if (currentUser) {
-        const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-        setContacts(data.data);
- 
-    }
-  }, [currentUser]);
-  const handleChatChange = (chat) => {
-    setCurrentChat(chat);
-  };
-  return (
-    <>
-      <Container>
-        <div className="container">
-          <Contacts contacts={contacts} changeChat={handleChatChange} />
-          {currentChat === undefined ? (
-            <h1 />
-          ) : (
-            <ChatContainer currentChat={currentChat} socket={socket} />
-          )}
-        </div>
-      </Container>
-    </>
-  );
+    useEffect(() => {
+        if (currentUser) {
+            var data;
+            Services.allusers(currentUser._id).then((res) => {
+                data = res;
+                setContacts(data.data);
+            })
+
+
+        }
+    }, [currentUser]);
+    const handleChatChange = (chat) => {
+        setCurrentChat(chat);
+    };
+    return (
+        <>
+            <Container>
+                <div className="container">
+                    <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+                    {currentChat === undefined ? (
+                       <Welcome/>
+                    ) : (
+                        <ChatContainer currentChat={currentChat} socket={socket} />
+                    )}
+                </div>
+            </Container>
+        </>
+    );
 }
 
 const Container = styled.div`
