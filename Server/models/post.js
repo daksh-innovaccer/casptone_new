@@ -10,12 +10,11 @@ const PostSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        //required: true,
     },
-    likesCount: {
-        type: Number,
-        default: 0,
-    },
+    // created: {
+    //     type: Date,
+    //     default: Date.now
+    // },
     likedBy: [
         {
             type: Schema.Types.ObjectId,
@@ -34,7 +33,7 @@ const PostSchema = new Schema({
         
     ],
 },
-{timestamps: true},
+{timestamps:true},
 );
 
 PostSchema.plugin(mongoosePaginate)
@@ -44,10 +43,12 @@ PostSchema.methods.interact = async function (userID) {
     const liked = await this.likedBy.includes(userID);
     if (!liked){
         await this.likedBy.push(userID);
+        this.likesCount = this.likesCount + 1;
         return this.save();
     }
     else if (liked){
         await this.likedBy.remove(userID);
+        this.likesCount = this.likesCount - 1;
         return this.save();
     }
     return Promise.resolve(this);
