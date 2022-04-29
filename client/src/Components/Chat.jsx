@@ -67,17 +67,17 @@ export default function Chat() {
 }
 
 const Container = styled.div`
-  height: 85vh;
-  width: 86.25vw;
+//   height: 85vh;
+//   width: 86.25vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #2e2829;
+//   background-color: #2e2829;
   .container {
-    height: 85vh;
-    width: 85vw;
+    height: 100%;
+    width: 100%;
     background-color: #000000;
     display: grid;
     grid-template-columns: 25% 75%;

@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom"
 import ForgotPassword from "./Components/Auth/ForgotPassword"
 import Chat from "./Components/Chat.jsx"
 import AddPost from "./Components/Post/AddPost"
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
+import Feed from './Components/Feed/Feed'
 
 function App() {
     const localdata = localStorage.getItem('token')
@@ -29,24 +30,26 @@ function App() {
     }
     useEffect(() => {
         document.title = "User interaction"
-      }, [])
+    }, [])
 
     return (
-        <div className="container mt-3 mb-3">
+        <div >
             {localdata ? <Header loggedState={isLogged} onLogoutClick={logoutHandler} /> : ""}
             {/* <h1>Hi There!</h1>
         <a href="/signin">SignIn</a> */}
-            <Routes>
-                <Route path='/' element={<SignIn />}></Route>
-                <Route path='/signin' element={<SignIn />}></Route>
-                <Route path="/list" element={<ListDetails />}></Route>
-                <Route path="/signup" element={<Signup />}></Route>
-                {/* <Route path="/signout"></Route> */}
-                <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-                <Route path="/add-post" element={<AddPost/>}></Route>
-                <Route path="/chat" element={<Chat />} />
+            <div className="mt-3">
+                <Routes>
+                    <Route path='/' element={<SignIn />}></Route>
+                    <Route path='/signin' element={<SignIn />}></Route>
+                    <Route path="/list" element={<Feed />}></Route>
+                    <Route path="/signup" element={<Signup />}></Route>
+                    {/* <Route path="/signout"></Route> */}
+                    <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                    <Route path="/add-post" element={<AddPost />}></Route>
+                    <Route path="/chat" element={<Chat />} />
 
-            </Routes>
+                </Routes>
+            </div>
         </div>
     );
 }
