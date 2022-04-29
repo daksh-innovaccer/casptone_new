@@ -127,6 +127,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // background-color:#de0d25;
     padding: 0 2rem;
     .user-details {
       display: flex;
@@ -166,23 +167,24 @@ const Container = styled.div`
         overflow-wrap: break-word;
         padding: 1rem;
         font-size: 1.1rem;
-        border-radius: 1rem;
+        border-radius: 0.7rem;
         color: #d1d1d1;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
+        
         }
       }
     }
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: #6f0dde;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        background-color: #de0d37;
       }
     }
   }
