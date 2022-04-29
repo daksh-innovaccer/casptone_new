@@ -21,14 +21,14 @@ export default function ChatContainer({ currentChat, socket }) {
         from: data._id,
         to: currentChat._id,
       });
-      console.log(typeof(response))
+      console.log(typeof (response))
 
       // Services.getMessage({
       //   from: data._id,
       //   to: currentChat._id,
       // }).then((res) => {
       //   response = res
-        // console.log(typeof(response))
+      // console.log(typeof(response))
       // })
       setMessages(response.data);
     })()
@@ -103,7 +103,7 @@ export default function ChatContainer({ currentChat, socket }) {
                   }`}
               >
                 <div className="content ">
-                  <p>{message.message}</p>
+                  {message.message}
                 </div>
               </div>
             </div>
@@ -117,17 +117,17 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 15% 70% 10%;
   gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
-    grid-template-rows: 15% 70% 15%;
+    grid-template-rows: 15% 70% 10%;
   }
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // background-color:#de0d25;
+    //background-color:#de0d25;
     padding: 0 2rem;
     .user-details {
       display: flex;

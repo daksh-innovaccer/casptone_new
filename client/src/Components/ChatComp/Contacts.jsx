@@ -60,7 +60,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 75% 15%;
+  grid-template-rows: 20% 75% 5%;
   overflow: hidden;
   background-color: #0d0c0c;
   .brand {
@@ -74,6 +74,7 @@ const Container = styled.div`
     h3 {
       color: white;
       text-transform: uppercase;
+      text-align: center;
     }
   }
   .contacts {

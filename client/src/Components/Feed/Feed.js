@@ -32,7 +32,8 @@ const Feed = () => {
     return (      
     <div className="container m-4">
          <div align='center'>
-         <h2>People are sharing their thoughts ! Had You ?</h2>
+         <h2>People are sharing their thoughts ! Have a look</h2>
+         <br />
          </div>
         
         <ul>
@@ -75,6 +76,7 @@ const Feed = () => {
                         
                     </Card.Body>
                 </Card>
+                <br />
            </div>
                
            ))}
