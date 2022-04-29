@@ -60,7 +60,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 20% 75% 5%;
+  grid-template-rows: 5% 75% 20%;
   overflow: hidden;
   background-color: #0d0c0c;
   .brand {
@@ -116,7 +116,7 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #de0d37;
+      background-color: #e61744;
     }
   }
   .current-user {

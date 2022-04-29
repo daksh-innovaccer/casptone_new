@@ -98,7 +98,7 @@ const Container = styled.div`
     }
   }
   .input-container {
-    width: 100%;
+    width: 100%;de0d37
     border-radius: 2rem;
     display: flex;
     align-items: center;
