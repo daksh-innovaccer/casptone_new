@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Fragment } from "react";
 
-
-export default function Contacts({ contacts, currentUser ,changeChat}) {
+export default function Contacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
-  useEffect(()=> {
-    (async()=>{const data = await JSON.parse(
-      localStorage.getItem('chat-app-current-user')
-    );
-    setCurrentUserName(data.name);
-              })()
+  useEffect(() => {
+    (async () => {
+      const data = await JSON.parse(
+        localStorage.getItem('chat-app-current-user')
+      );
+      setCurrentUserName(data.name);
+    })()
   }, []);
-  useEffect( () => {
-    if(currentUser){
+  useEffect(() => {
+    if (currentUser) {
       setCurrentUserName(currentUser.name);
     }
   }, [currentUser]);
@@ -22,8 +23,8 @@ export default function Contacts({ contacts, currentUser ,changeChat}) {
     changeChat(contact);
   };
   return (
-    <>
-      { currentUserName && (
+    <Fragment>
+      {currentUserName && (
         <Container>
           <div className="brand">
             <h3>Contacts</h3>
@@ -46,22 +47,22 @@ export default function Contacts({ contacts, currentUser ,changeChat}) {
               );
             })}
           </div>
-          <div className="current-user">
+          {/* <div className="current-user">
 
-                        <div className="username">
-                            <h2>{currentUserName}</h2>
-                        </div>
-                    </div>
-                </Container>
-            )}
-        </>
-    );
+            <div className="username">
+              <h2>Hi {currentUserName}</h2>
+            </div>
+          </div> */}
+        </Container>
+      )}
+    </Fragment>
+  );
 }
 const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #434c6e;
+  background-color: #0d0c0c;
   .brand {
     display: flex;
     align-items: center;
@@ -84,22 +85,23 @@ const Container = styled.div`
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #101a3b;
+        background-color: #261010;
         width: 0.1rem;
         border-radius: 1rem;
       }
     }
     .contact {
-      background-color: #ffffff34;
+      background-color: #2e2829;
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
-      border-radius: 0.2rem;
-      padding: 0.4rem;
+      border-radius: 1rem;
+      padding: 0.6rem;
+      
       display: flex;
       gap: 1rem;
       align-items: center;
-      transition: 0.5s ease-in-out;
+      transition: 0.2s ease-in-out;
       .avatar {
         img {
           height: 3rem;
@@ -107,16 +109,17 @@ const Container = styled.div`
       }
       .username {
         h3 {
+          font-size: 24px;
           color: white;
         }
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: #de0d37;
     }
   }
   .current-user {
-    background-color: #0d0d30;
+    background-color: #0d0c0c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,7 +132,10 @@ const Container = styled.div`
     }
     .username {
       h2 {
-        color: white;
+        color: White;
+        font-size: 30px;
+        font-family: "Times New Roman", Times, serif;
+ 
       }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {
