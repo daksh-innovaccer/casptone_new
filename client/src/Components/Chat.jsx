@@ -31,7 +31,7 @@ export default function Chat() {
     }, []);
     useEffect(() => {
         if (currentUser) {
-            socket.current = io(host);
+            socket.current = io("http://localhost:3500");
             socket.current.emit("add-user", currentUser._id);
         }
     }, [currentUser]);
@@ -74,11 +74,11 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #9ba3c2;
   .container {
     height: 85vh;
     width: 85vw;
-    background-color: #00000076;
+    background-color: #000000;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
