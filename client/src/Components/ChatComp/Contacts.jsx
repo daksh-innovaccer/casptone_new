@@ -61,7 +61,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #080420;
+  background-color: #434c6e;
   .brand {
     display: flex;
     align-items: center;
@@ -84,7 +84,7 @@ const Container = styled.div`
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #ffffff39;
+        background-color: #101a3b;
         width: 0.1rem;
         border-radius: 1rem;
       }

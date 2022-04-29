@@ -1,6 +1,11 @@
+import AddPost from "../Post/AddPost"
+import Feed from "../Feed/Feed"
+
 const ListDetails = (props) =>{
     return(
-        <h1>### LIST POSTS HERE ###</h1>
+        <div>
+            <Feed/>
+        </div>
     )
 }
 
