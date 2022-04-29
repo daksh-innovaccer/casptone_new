@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import Services from "../../Services/Services";
 import {Card, Button} from 'react-bootstrap';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 
 const Feed = () => {
     const dispatch = useDispatch()
@@ -18,11 +18,12 @@ const Feed = () => {
         });
     }
     
-    useEffect(async ()=>{
-        getPosts();
+    useEffect(()=>{
+        (async()=>{getPosts();
 
         const localdata = await localStorage.getItem('chat-app-current-user');
         dispatch({type:id, value: localdata._id});
+        })()
     }, []);
 
     const {posts, id} = useSelector((state)=>state);
