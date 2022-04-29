@@ -36,7 +36,7 @@ const Feed = () => {
          </div>
         
         <ul>
-           {posts.map((post)=>(
+           {posts.reverse().map((post)=>(
                <div key = {post._id}>
                 <Card>
                     <Card.Header as="h5">{post.author?.name}</Card.Header>
