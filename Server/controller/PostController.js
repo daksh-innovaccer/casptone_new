@@ -1,3 +1,4 @@
+const { sortBy } = require('lodash');
 const Post = require('../models/post');
 const User = require('../models/user');
 const { options } = require('../routes/auth');
@@ -59,11 +60,11 @@ const fetchPosts = async (req, res) => {
     const options = req.query;
     options.populate = {
         path: 'author',
-        select: ['name'],
-        pagination: false,
+        select: ['name'],    
     };
     options.sortBy = 'createdAt:desc';
     const posts = await Post.paginate({}, options);
+
     res.status(200).json(posts);
 }
 

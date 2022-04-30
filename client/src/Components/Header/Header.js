@@ -26,14 +26,14 @@ const Header = (props) => {
     }, []);
     return (
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom border-danger" >
             <div class="container-fluid">
                 <a class="navbar-brand" onClick={homeHandler}>UserInteraction</a>
                 {/* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button> */}
                 
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" onClick={homeHandler}>Home</a>
                         </li>
@@ -45,8 +45,8 @@ const Header = (props) => {
                             <a class="nav-link active" onClick={chatHandler}>Chat</a>
                         </li>
                     </ul>
-                    <div><span class="navbar-text" style={{color:'white'}}>
-                        Hi '{name}' &nbsp;
+                    <div><span class="navbar-text" style={{color:'white',}}>
+                        Hi <strong>{name}</strong> &nbsp;
                         &nbsp;  
                     </span></div>
                 

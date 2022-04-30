@@ -26,6 +26,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
     <Fragment>
       {currentUserName && (
         <Container>
+          
           <div className="brand">
             <h3>Contacts</h3>
           </div>
@@ -60,8 +61,10 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 5% 75% 20%;
+  grid-template-rows: 20% 75% 5%;
   overflow: hidden;
+  height: 90%;
+  
   background-color: #0d0c0c;
   .brand {
     display: flex;
