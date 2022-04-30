@@ -33,11 +33,11 @@ function App() {
     }, [])
 
     return (
-        <div >
+        <div style={{backgroundColor: '#212529'}}>
             {localdata ? <Header loggedState={isLogged} onLogoutClick={logoutHandler} /> : ""}
             {/* <h1>Hi There!</h1>
         <a href="/signin">SignIn</a> */}
-            <div className="mt-3">
+            <div className="" >
                 <Routes>
                     <Route path='/' element={<SignIn />}></Route>
                     <Route path='/signin' element={<SignIn />}></Route>

@@ -117,8 +117,9 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 5% 80% 15%;
+  grid-template-rows: 15% 75% 10%;
   gap: 0.1rem;
+  max-height: 100%;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 10%;

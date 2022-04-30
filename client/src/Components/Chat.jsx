@@ -67,9 +67,11 @@ export default function Chat() {
 }
 
 const Container = styled.div`
-//   height: 85vh;
+  height: 90vh;
+  min-height: 100%;
 //   width: 86.25vw;
   display: flex;
+  
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
@@ -78,10 +80,11 @@ const Container = styled.div`
   .container {
     height: 100%;
     width: 100%;
+    
     background-color: #000000;
     display: grid;
     grid-template-columns: 25% 75%;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    @media screen and (min-width: 720px) and (max-width: 2980px) {
       grid-template-columns: 35% 65%;
     }
   }

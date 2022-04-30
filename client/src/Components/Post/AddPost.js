@@ -23,8 +23,9 @@ const AddPost = () => {
         });
     }
     return (
-        <div className="container m-4">
-            <h2>Add Post</h2>
+        <div className="container m-8" style={{ minHeight: '42rem'}} >
+            <br/>
+            <h2 className="text-white">Add Post</h2>
             
             <form onSubmit={postHandler}>
                 <div className="form-group">
@@ -40,7 +41,7 @@ const AddPost = () => {
                 </div>
                 <br></br>
                 <div className="form-group">
-                    <input type="submit" value="Post" className="btn btn-primary" />
+                    <input type="submit" value="Post" className="btn btn-danger" />
                 </div>
             </form>
         </div>

@@ -30,17 +30,18 @@ const Feed = () => {
     //console.log(posts);
    
     return (      
-    <div className="container m-4">
-         <div align='center'>
-         <h2>People are sharing their thoughts ! Have a look</h2>
+    <div className="" style={{background:"#212529"}}>
+         <div align='center' >
+             <br></br>
+         <h2 className="text-white">People are sharing their thoughts ! Have a look</h2>
          <br />
          </div>
-        
+       
         <ul>
-           {posts.reverse().map((post)=>(
-               <div key = {post._id}>
-                <Card>
-                    <Card.Header as="h5">{post.author?.name}</Card.Header>
+           {posts.slice(0).reverse().map((post)=>(
+               <div key = {post._id} style={{ boxSizing:"border-box", width:"60%",  margin:"auto"}}>
+                <Card >
+                    <Card.Header style={{backgroundColor:'#2e2829'}}as="h5" className="text-white">{post.author?.name}</Card.Header>
                     
                     <Card.Body>
                         <Card.Title>{post.text}</Card.Title>
@@ -69,7 +70,7 @@ const Feed = () => {
                             }
                             await Services.interact(postData);
                             console.log("success");
-                        }}>❌</Button>
+                        }}>👎</Button>
 
 
                         
