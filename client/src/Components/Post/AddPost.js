@@ -1,3 +1,6 @@
+// Author - Tarun Kochar
+// Add Post module to add new posts
+
 import { Link, useNavigate } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
 import Services from "../../Services/Services";

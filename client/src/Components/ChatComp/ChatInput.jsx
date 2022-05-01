@@ -33,6 +33,7 @@ export default function ChatInput({ handleSendMsg }) {
         </div>
       </div>
       <form className="input-container" style={{borderRadius:"2rem"}} onSubmit={(event) => sendChat(event)}>
+        
         <input
           type="text"
           placeholder="type your message here"
