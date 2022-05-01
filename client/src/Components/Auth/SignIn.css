@@ -9,6 +9,7 @@ form{
 
 main{
     display: block;
+    
 }
 
 .form-signin {
@@ -16,6 +17,9 @@ main{
     max-width: 330px;
     padding: 15px;
     margin: auto;
+    height: 100%;
+   
+    
 }
 
 .h1margin{
@@ -34,6 +38,7 @@ main{
     height: 1px;
     position: relative;
     top: 0.45em;
+    
 }
 ._0tv-g {
     color: #8e8e8e;

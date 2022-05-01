@@ -26,7 +26,7 @@ const AddPost = () => {
         });
     }
     return (
-        <div className="container m-8" style={{ minHeight: '42rem'}} >
+        <div className="container m-8"  >
             <br/>
             <h2 className="text-white">Add Post</h2>
             

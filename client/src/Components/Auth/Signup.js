@@ -40,9 +40,9 @@ const Signup = () => {
     }
     return (
         <div className="text-center">
-            <h1 className='h1margin fw-normal'>Register</h1>
+            <h1 className='h1margin fw-normal text-white'>Register</h1>
             <main className="form-signin">
-                <hr className="my-4" />
+                <hr className="" />
                 <span className="w-100 btn btn-lg">
                     <button type="submit" className="w-100 btn btn-lg"><SocialLogin /></button>
                 </span>
@@ -84,13 +84,13 @@ const Signup = () => {
                         />
                         <label htmlFor="password">Password</label>
                     </div>
-                    <button type="submit" className="w-100 btn btn-lg btn-primary mb-3">Sign Up</button>
+                    <button type="submit" className="w-100 btn btn-lg btn-danger mb-3">Sign Up</button>
                 </form>
 
                 <hr className="my-4" />
-                <p className="text-center">
+                <p className="text-center text-white">
                     Already have an account? {'  '}
-                    <a href="/signin">Sign In</a>
+                    <a href="/signin" className="text-danger">Sign In</a>
                 </p>
             </main>
         </div>

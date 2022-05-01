@@ -34,6 +34,7 @@ const Feed = () => {
    
     return (      
     <div className="" style={{background:"#212529"}}>
+    
          <div align='center' >
              <br></br>
          <h2 className="text-white">People are sharing their thoughts ! Have a look</h2>
