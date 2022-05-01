@@ -21,6 +21,12 @@ const PostSchema = new Schema({
             ref: 'User'
         }
     ],
+    unlikedBy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
     comments: [
         {
         
@@ -39,16 +45,30 @@ const PostSchema = new Schema({
 PostSchema.plugin(mongoosePaginate)
 /*  Adding and removing the user id when someone likes the post */
 
-PostSchema.methods.interact = async function (userID) {
+PostSchema.methods.like = async function (userID) {
     const liked = await this.likedBy.includes(userID);
     if (!liked){
         await this.likedBy.push(userID);
-        this.likesCount = this.likesCount + 1;
         return this.save();
     }
     else if (liked){
         await this.likedBy.remove(userID);
-        this.likesCount = this.likesCount - 1;
+        return this.save();
+    }
+    return Promise.resolve(this);
+};  
+
+
+PostSchema.methods.unlike = async function (userID) {
+    const unliked = await this.unlikedBy.includes(userID);
+    if (!unliked){
+        await this.unlikedBy.push(userID);
+        
+        return this.save();
+    }
+    else if (unliked){
+        await this.unlikedBy.remove(userID);
+       
         return this.save();
     }
     return Promise.resolve(this);

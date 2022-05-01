@@ -37,7 +37,7 @@ const deletePost = async (req, res) => {
 
 }
 
-const interact = async (req, res) => {
+const like = async (req, res) => {
     const postID = req.body.postID;
     const userID =  req.body.userID;
 
@@ -48,7 +48,23 @@ const interact = async (req, res) => {
         res.status(400).send("Bad Request");
     }
     
-    await post.interact(userID);
+    await post.like(userID);
+
+    res.status(201).json({success: true, post})
+}
+
+const unlike = async (req, res) => {
+    const postID = req.body.postID;
+    const userID =  req.body.userID;
+
+    const post = await Post.findById(postID);
+
+    if (!post){
+        //throw "Post not found";
+        res.status(400).send("Bad Request");
+    }
+    
+    await post.unlike(userID);
 
     res.status(201).json({success: true, post})
 }
@@ -68,21 +84,5 @@ const fetchPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
-const comment = async (req, res) => {
-    const {postID} = req.params;
-    const userID = await req.body.userID;
-    const text = await req.body.text;
-
-    const post = await Post.findById(postID);   
-
-    if (!post){
-        //throw "Post not found";
-        res.status(400).send("Bad Request");
-    }
-
-    await post.comment(userID, text);
-    res.status(201).json({commentAdded: true, post, comment})
-}
-
-module.exports = {createPost, interact, deletePost, fetchPosts, comment};
+module.exports = {createPost, like, unlike, deletePost, fetchPosts};
 

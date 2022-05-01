@@ -1,3 +1,6 @@
+// Author - Tarun Kochar
+// Feed module, to display posts and users can interact (like and dislike).
+
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
@@ -57,8 +60,8 @@ const Feed = () => {
                                 postID : post._id,
                                 userID : localdata._id,
                             }
-                            await Services.interact(postData);
-                            console.log("success");
+                            await Services.like(postData);
+                            alert("Post Liked ✔️")
                         }}>⭐</Button>
                         <Button variant= "secondary" onClick={async ()=>{
                              const localdata = await JSON.parse(
@@ -68,8 +71,8 @@ const Feed = () => {
                                 postID : post._id,
                                 userID : localdata._id,
                             }
-                            await Services.interact(postData);
-                            console.log("success");
+                            await Services.unlike(postData);
+                            alert("Post DisLiked 😟")
                         }}>👎</Button>
 
 

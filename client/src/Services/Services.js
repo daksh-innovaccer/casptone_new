@@ -43,8 +43,11 @@ class Service {
     getPosts(){
         return axios.get(USER_BASE_URL + "post/fetch");
     }
-    interact(postData){
-        return axios.post(USER_BASE_URL + "post/interact", postData, {headers:headers});
+    like(postData){
+        return axios.post(USER_BASE_URL + "post/like", postData, {headers:headers});
+    }
+    unlike(postData){
+        return axios.post(USER_BASE_URL + "post/unlike", postData, {headers:headers});
     }
     delete(postData){
         return axios.delete(USER_BASE_URL + "post/delete",{headers:headers}, postData);
