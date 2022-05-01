@@ -37,7 +37,7 @@ function App() {
             {localdata ? <Header loggedState={isLogged} onLogoutClick={logoutHandler} /> : ""}
             {/* <h1>Hi There!</h1>
         <a href="/signin">SignIn</a> */}
-            <div className="" >
+            <div className=""  style={{backgroundColor: '#212529'}}>
                 <Routes>
                     <Route path='/' element={<SignIn />}></Route>
                     <Route path='/signin' element={<SignIn />}></Route>

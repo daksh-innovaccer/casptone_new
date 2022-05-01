@@ -57,7 +57,7 @@ const SignIn = () => {
 
     return (
         <div className="text-center">
-            <h1 className='h1margin mt-3 mb-3 fw-normal'>Log In</h1>
+            <h1 className='h1margin mt-3 mb-3 fw-normal text-white'>Log In</h1>
             <main className="form-signin">
                 {isLogged === false ?
                     (<div className="alert alert-danger">
@@ -89,7 +89,7 @@ const SignIn = () => {
                         />
                         <label htmlFor="password">Password</label>
                     </div>
-                    <button type="submit" className="w-100 btn btn-lg btn-primary mb-3">Login</button>
+                    <button type="submit" className="w-100 btn btn-lg btn-danger mb-3">Login</button>
                     <br />
                     <div>
                         <Link to="/forgot-password" className="text-danger">
@@ -110,8 +110,8 @@ const SignIn = () => {
                     <br /><SocialLogin /> */}
                 </form>
                 <hr className="my-4" />
-                <p className="text-center">
-                    Don't have an account?<a href="/signup"> SignUp</a>
+                <p className="text-center text-white">
+                    Don't have an account?<a href="/signup" className='text-danger'> SignUp</a>
                 </p>
             </main>
         </div>
