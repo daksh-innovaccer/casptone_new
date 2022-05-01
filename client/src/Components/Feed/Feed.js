@@ -62,7 +62,7 @@ const Feed = () => {
                                 userID : localdata._id,
                             }
                             await Services.like(postData);
-                            alert("Post Liked ✔️")
+                            alert("Post Liked 😀")
                         }}>⭐</Button>
                         <Button variant= "secondary" onClick={async ()=>{
                              const localdata = await JSON.parse(
@@ -76,7 +76,7 @@ const Feed = () => {
                             alert("Post DisLiked 😟")
                         }}>👎</Button>
 
-
+                        
                         
                         
                     </Card.Body>
