@@ -32,9 +32,6 @@ This is a social media based capstone project having functionalities
 - **DockerHub** --> to host our images
 - **AWS EC2 instance** --> to run our application at a public level
 
-## Running the Application
-
-* As an Image is already published of the Code, you just need to pull the image to your local machine (after installing docker) and then run the contianer with the command specified.
 
 ## Installing Docker (on Ubuntu)
 
