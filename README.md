@@ -16,8 +16,8 @@ This is a social media based capstone project having functionalities
 - Daksh Bindal
 - Dushyant Gupta
 - Samyak Goyal
-- Tarun Kochar
 - Govind Soni
+- Tarun Kochar
    
 ## Tech Stack Used:
 
